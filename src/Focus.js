@@ -12,7 +12,7 @@ function Focus({
         Focus Duration: {minutesToDuration(focusDuration)}
       </span>
       <div className="input-group-append">
-        {/* TODO: Implement decreasing focus duration and disable during a focus or break session */}
+        {/* TODO:disable during a focus or break session */}
         <button
           type="button"
           className="btn btn-secondary"
@@ -21,7 +21,7 @@ function Focus({
         >
           <span className="oi oi-minus" />
         </button>
-        {/* TODO: Implement increasing focus duration  and disable during a focus or break session */}
+        {/* TODO:disable during a focus or break session */}
         <button
           type="button"
           className="btn btn-secondary"
