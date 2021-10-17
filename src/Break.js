@@ -5,6 +5,7 @@ function Break({
   breakDuration,
   handleAddBreak,
   handleSubtractBreak,
+  isTimerRunning,
 }) {
   return (
     <>
@@ -12,21 +13,21 @@ function Break({
         Break Duration: {minutesToDuration(breakDuration)}
       </span>
       <div className="input-group-append">
-        {/* TODO:disable during a focus or break session*/}
         <button
           type="button"
           className="btn btn-secondary"
           data-testid="decrease-break"
           onClick={handleSubtractBreak}
+          disabled={isTimerRunning}
         >
           <span className="oi oi-minus" />
         </button>
-        {/* TODO:disable during a focus or break session*/}
         <button
           type="button"
           className="btn btn-secondary"
           data-testid="increase-break"
           onClick={handleAddBreak}
+          disabled={isTimerRunning}
         >
           <span className="oi oi-plus" />
         </button>

@@ -57,7 +57,6 @@ function Pomodoro() {
   // The current session - null where there is no session running
   const [session, setSession] = useState(null);
 
-  // ToDo: Allow the user to adjust the focus and break duration.
   const [focusDuration, setFocusDuration] = useState(25);
   const [breakDuration, setBreakDuration] = useState(5);
 
@@ -138,6 +137,7 @@ function Pomodoro() {
               focusDuration={focusDuration}
               handleAddFocus={handleAddFocus}
               handleSubtractFocus={handleSubtractFocus}
+              isTimerRunning={isTimerRunning}
             />
           </div>
         </div>
@@ -149,6 +149,7 @@ function Pomodoro() {
                 breakDuration={breakDuration}
                 handleAddBreak={handleAddBreak}
                 handleSubtractBreak={handleSubtractBreak}
+                isTimerRunning={isTimerRunning}
               />
             </div>
           </div>
