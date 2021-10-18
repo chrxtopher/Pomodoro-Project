@@ -8,7 +8,7 @@ function Break({
   isTimerRunning,
 }) {
   return (
-    <>
+    <div>
       <span className="input-group-text" data-testid="duration-break">
         Break Duration: {minutesToDuration(breakDuration)}
       </span>
@@ -32,7 +32,7 @@ function Break({
           <span className="oi oi-plus" />
         </button>
       </div>
-    </>
+    </div>
   );
 }
 export default Break;

@@ -58,10 +58,9 @@ function Pomodoro() {
   const [isTimerRunning, setIsTimerRunning] = useState(false);
   // The current session - null where there is no session running
   const [session, setSession] = useState(null);
-
   const [focusDuration, setFocusDuration] = useState(25);
   const [breakDuration, setBreakDuration] = useState(5);
-
+  const [timerBar, setTimerBar] = useState(0);
   /**
    * Custom hook that invokes the callback function every second
    *
@@ -73,7 +72,21 @@ function Pomodoro() {
         new Audio("https://bigsoundbank.com/UPLOAD/mp3/1482.mp3").play();
         return setSession(nextSession(focusDuration, breakDuration));
       }
-      return setSession(nextTick);
+      setSession(nextTick);
+
+      if (session.label === "Focusing") {
+        setTimerBar(
+          ((focusDuration * 60 - session.timeRemaining) /
+            (focusDuration * 60)) *
+            100
+        );
+      } else {
+        setTimerBar(
+          ((breakDuration * 60 - session.timeRemaining) /
+            (breakDuration * 60)) *
+            100
+        );
+      }
     },
     isTimerRunning ? 1000 : null
   );
@@ -110,7 +123,7 @@ function Pomodoro() {
   };
 
   const handleSubtractFocus = () => {
-    setFocusDuration((last) => Math.max(5, last - 1));
+    setFocusDuration((last) => Math.max(5, last - 5));
   };
 
   const handleAddBreak = () => {
@@ -174,6 +187,7 @@ function Pomodoro() {
           minutesToDuration={minutesToDuration}
           focusDuration={focusDuration}
           breakDuration={breakDuration}
+          timerBar={timerBar}
         />
       </div>
     </div>

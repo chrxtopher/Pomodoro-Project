@@ -8,7 +8,7 @@ function Focus({
   isTimerRunning,
 }) {
   return (
-    <>
+    <div>
       <span className="input-group-text" data-testid="duration-focus">
         Focus Duration: {minutesToDuration(focusDuration)}
       </span>
@@ -32,7 +32,7 @@ function Focus({
           <span className="oi oi-plus" />
         </button>
       </div>
-    </>
+    </div>
   );
 }
 //
