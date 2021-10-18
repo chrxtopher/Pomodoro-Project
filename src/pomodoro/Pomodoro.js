@@ -5,6 +5,8 @@ import { minutesToDuration } from "../utils/duration";
 import { secondsToDuration } from "../utils/duration";
 import Focus from "../Focus";
 import Break from "../Break";
+import PlayPauseStop from "../PlayPauseStop";
+import TimerDisplay from "../TimerDisplay";
 
 // These functions are defined outside of the component to insure they do not have access to state
 // and are, therefore more likely to be pure.
@@ -73,7 +75,7 @@ function Pomodoro() {
       }
       return setSession(nextTick);
     },
-    isTimerRunning ? 10 : null
+    isTimerRunning ? 1000 : null
   );
 
   /**
@@ -157,68 +159,22 @@ function Pomodoro() {
       </div>
       <div className="row">
         <div className="col">
-          <div
-            className="btn-group btn-group-lg mb-2"
-            role="group"
-            aria-label="Timer controls"
-          >
-            <button
-              type="button"
-              className="btn btn-primary"
-              data-testid="play-pause"
-              title="Start or pause timer"
-              onClick={playPause}
-            >
-              <span
-                className={classNames({
-                  oi: true,
-                  "oi-media-play": !isTimerRunning,
-                  "oi-media-pause": isTimerRunning,
-                })}
-              />
-            </button>
-            <button
-              type="button"
-              className="btn btn-secondary"
-              data-testid="stop"
-              title="Stop the session"
-              onClick={handleStop}
-              disabled={!isTimerRunning}
-            >
-              <span className="oi oi-media-stop" />
-            </button>
-          </div>
+          <PlayPauseStop
+            playPause={playPause}
+            isTimerRunning={isTimerRunning}
+            handleStop={handleStop}
+            classNames={classNames}
+          />
         </div>
       </div>
       <div>
-        {/* TODO: This area should show only when there is an active focus or break - i.e. the session is running or is paused */}
-        <div className="row mb-2">
-          <div className="col">
-            <h2 data-testid="session-title">
-              {session?.label} for{" "}
-              {session?.label === "Focusing"
-                ? minutesToDuration(focusDuration)
-                : minutesToDuration(breakDuration)}
-            </h2>
-            <p className="lead" data-testid="session-sub-title">
-              {secondsToDuration(session?.timeRemaining)} remaining
-            </p>
-          </div>
-        </div>
-        <div className="row mb-2">
-          <div className="col">
-            <div className="progress" style={{ height: "20px" }}>
-              <div
-                className="progress-bar"
-                role="progressbar"
-                aria-valuemin="0"
-                aria-valuemax="100"
-                aria-valuenow="0" // TODO: Increase aria-valuenow as elapsed time increases
-                style={{ width: "0%" }} // TODO: Increase width % as elapsed time increases
-              />
-            </div>
-          </div>
-        </div>
+        <TimerDisplay
+          session={session}
+          secondsToDuration={secondsToDuration}
+          minutesToDuration={minutesToDuration}
+          focusDuration={focusDuration}
+          breakDuration={breakDuration}
+        />
       </div>
     </div>
   );
